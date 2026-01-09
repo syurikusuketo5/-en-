@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学専門 オンライン塾『en』 - 縁を大切にし、「どこでも」「だれでも」を叶える</title>
+    
+    <!-- Google Fonts: Serif for intellect, Sans for readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            main: '#0F172A',   // Slate 900 (Deep Navy)
+                            accent: '#C0A062', // Muted Gold
+                            light: '#F8FAFC',  // Slate 50
+                            gray: '#334155',   // Slate 700
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        serif: ['"Noto Serif JP"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: #334155;
+        }
+        h1, h2, h3, .serif-font {
+            font-family: 'Noto Serif JP', serif;
+        }
+        .hero-pattern {
+            background-color: #F8FAFC;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Elegant scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700 font-light">
+
+    <!-- Navbar -->
+    <header class="fixed w-full bg-white/95 backdrop-blur-md shadow-sm z-50 border-b border-gray-100">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="text-brand-main border border-brand-main p-1.5 rounded-sm">
+                    <span class="font-serif font-bold text-xl px-1">en</span>
+                </div>
+                <div>
+                    <span class="block text-[10px] font-medium text-brand-gray tracking-widest uppercase">Mathematical Institute</span>
+                    <span class="text-lg font-bold text-brand-main serif-font tracking-wide">数学専門 オンライン塾『en』</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-10 text-sm font-medium text-slate-600 tracking-wide">
+                <a href="#concept" class="hover:text-brand-accent transition-colors duration-300 relative group">
+                    指導理念
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#method" class="hover:text-brand-accent transition-colors duration-300 relative group">
+                    指導メソッド
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#secrets" class="hover:text-brand-accent transition-colors duration-300 relative group">
+                    学力向上の秘訣
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contact" class="hover:text-brand-accent transition-colors duration-300 relative group">
+                    お問い合わせ
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-accent transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:block">
+                <a href="#contact" class="bg-brand-main hover:bg-slate-800 text-white text-sm font-medium py-3 px-6 rounded-sm shadow-md transition-all duration-300 tracking-wider">
+                    無料学習相談
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-brand-main focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+            <a href="#concept" class="block py-4 px-6 text-slate-600 border-b border-gray-50 hover:bg-gray-50">指導理念</a>
+            <a href="#method" class="block py-4 px-6 text-slate-600 border-b border-gray-50 hover:bg-gray-50">指導メソッド</a>
+            <a href="#secrets" class="block py-4 px-6 text-slate-600 border-b border-gray-50 hover:bg-gray-50">学力向上の秘訣</a>
+            <a href="#contact" class="block py-4 px-6 text-brand-main font-bold bg-gray-50">お問い合わせ</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden hero-pattern min-h-[80vh] flex items-center justify-center">
+        <!-- Abstract Background Elements (Math Symbols) -->
+        <div class="absolute inset-0 pointer-events-none select-none overflow-hidden opacity-[0.03]">
+            <span class="absolute top-20 left-10 text-9xl font-serif text-brand-main">∫</span>
+            <span class="absolute bottom-20 right-10 text-9xl font-serif text-brand-main">∑</span>
+            <span class="absolute top-1/3 right-20 text-8xl font-serif text-brand-main">π</span>
+            <span class="absolute bottom-1/3 left-20 text-8xl font-serif text-brand-main">√</span>
+            <span class="absolute top-10 right-1/3 text-6xl font-serif text-brand-main">sin</span>
+            <span class="absolute bottom-10 left-1/3 text-6xl font-serif text-brand-main">log</span>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="max-w-5xl mx-auto animate-on-load">
+                <p class="text-brand-accent font-bold tracking-[0.2em] mb-8 uppercase text-sm md:text-base">Online Math School</p>
+                
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight text-brand-main mb-12 font-serif tracking-tight">
+                    <span class="inline-block">解法を覚えるな！</span><br class="hidden md:block">
+                    <span class="inline-block mt-2 md:mt-4">
+                        <span class="relative inline-block">
+                            本質
+                            <span class="absolute bottom-3 left-0 w-full h-3 md:h-5 bg-brand-accent/40 -z-10"></span>
+                        </span>
+                        を理解せよ！
+                    </span>
+                </h1>
+                
+                <div class="w-24 h-1 bg-brand-main mx-auto mb-12"></div>
+
+                <p class="text-lg md:text-2xl text-slate-700 mb-12 leading-relaxed font-light max-w-3xl mx-auto">
+                    <span class="font-bold text-brand-main block mb-6 text-xl md:text-3xl font-serif">縁を大切にし、「どこでも」「だれでも」を叶える。</span>
+                    数学専門 オンライン塾『en』は、<br class="hidden md:inline">
+                    場所や環境にとらわれず、本気で学びたいあなたのための塾です。<br>
+                    一人ひとりと向き合い、確実な成績向上をサポートします。
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#contact" class="bg-brand-main text-white text-lg font-medium py-5 px-12 rounded-sm shadow-xl hover:bg-slate-800 transition-all text-center tracking-widest hover:scale-105 transform duration-300">
+                        体験授業・相談
+                    </a>
+                    <a href="#concept" class="bg-white text-brand-main border border-brand-main text-lg font-medium py-5 px-12 rounded-sm hover:bg-brand-main hover:text-white transition-all text-center tracking-widest hover:scale-105 transform duration-300">
+                        enについて
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section id="concept" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in-up">
+                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase">Concept</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 text-brand-main serif-font">現状を受け入れ、<br class="md:hidden">ゴールを見据える。</h2>
+                <div class="w-16 h-0.5 bg-brand-main mx-auto mt-6"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto text-center fade-in-up">
+                <p class="text-lg md:text-xl leading-relaxed font-light text-slate-700 mb-8">
+                    ただ、ゴール（第1志望大学）にばかり目を向けても<br class="hidden md:inline">学力は上がりません。
+                </p>
+                <div class="bg-slate-50 p-8 md:p-12 border border-slate-100 relative">
+                    <i class="fa-solid fa-quote-left text-4xl text-brand-accent/20 absolute top-4 left-4"></i>
+                    <p class="text-xl md:text-2xl font-bold text-brand-main mb-6 serif-font">
+                        「現状の学力」を受け入れ、<br>
+                        そして向き合うこと。
+                    </p>
+                    <p class="text-slate-600 leading-8">
+                        今、何をしないといけないのか。<br>
+                        自分の現在地を正確に把握することから、すべては始まります。<br>
+                        そこからゴールまでの道のりを、私たちと一緒に考えましょう。
+                    </p>
+                    <i class="fa-solid fa-quote-right text-4xl text-brand-accent/20 absolute bottom-4 right-4"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method Section -->
+    <section id="method" class="py-24 bg-brand-light relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 fade-in-up">
+                <div>
+                    <span class="text-brand-accent font-bold tracking-widest text-xs uppercase">Method</span>
+                    <h2 class="text-3xl md:text-4xl font-bold mt-3 text-brand-main serif-font">独自のカリキュラム</h2>
+                </div>
+                <p class="text-slate-500 text-sm mt-4 md:mt-0 font-light">
+                    確実に成績を上げるための逆算思考
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in-up">
+                    <h3 class="text-2xl font-bold text-brand-main serif-font mb-6 border-l-4 border-brand-accent pl-4">
+                        ゴールからの逆算
+                    </h3>
+                    <p class="text-slate-600 leading-8 mb-6 font-light">
+                        生徒ひとりひとりの性格や学力を把握し、第1志望大学という「ゴール」から逆算を行います。
+                        画一的な授業ではなく、あなたのためだけの計画が必要です。
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-center bg-white p-4 shadow-sm border-l-4 border-brand-main">
+                            <span class="text-brand-accent font-bold mr-4 text-xl">01</span>
+                            <span class="font-bold text-slate-700">オリジナルカリキュラムの作成</span>
+                        </li>
+                        <li class="flex items-center bg-white p-4 shadow-sm border-l-4 border-brand-main">
+                            <span class="text-brand-accent font-bold mr-4 text-xl">02</span>
+                            <span class="font-bold text-slate-700">オリジナルテキストの作成</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="relative fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="absolute inset-0 bg-brand-accent/10 transform translate-x-4 translate-y-4 -z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="計画とテキスト" class="w-full shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Secrets Section (New) -->
+    <section id="secrets" class="py-24 bg-brand-main text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 fade-in-up">
+                <span class="text-brand-accent font-bold tracking-widest text-xs uppercase">Message</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-3 text-white serif-font">学力を上げる2つの秘訣</h2>
+                <p class="mt-6 text-slate-300 font-light">
+                    学力を上げる方法は、実はとてもシンプルです。<br>
+                    この2つだけで、必ず学力は上がります。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Secret 1 -->
+                <div class="bg-white/5 border border-white/10 p-10 text-center hover:bg-white/10 transition-colors duration-300 fade-in-up">
+                    <div class="text-brand-accent text-5xl mb-6 font-serif">I</div>
+                    <h3 class="text-2xl font-bold mb-4">真面目にコツコツ<br>取り組む</h3>
+                    <p class="text-slate-400 text-sm font-light">
+                        継続は力なり。日々の積み重ねを疎かにせず、一歩一歩着実に進む姿勢が大切です。
+                    </p>
+                </div>
+
+                <!-- Secret 2 -->
+                <div class="bg-white/5 border border-white/10 p-10 text-center hover:bg-white/10 transition-colors duration-300 fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="text-brand-accent text-5xl mb-6 font-serif">II</div>
+                    <h3 class="text-2xl font-bold mb-4">素直にコツコツ<br>取り組む</h3>
+                    <p class="text-slate-400 text-sm font-light">
+                        アドバイスを受け入れ、柔軟に吸収する心。素直さが成長のスピードを加速させます。
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 fade-in-up" style="transition-delay: 0.2s;">
+                <p class="text-xl font-bold text-white serif-font tracking-widest border-b border-brand-accent inline-block pb-2">
+                    一緒に頑張りましょう！
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Access/Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="container mx-auto px-6">
+             <div class="flex flex-col md:flex-row gap-12 items-start fade-in-up">
+                 <div class="md:w-1/2">
+                     <h2 class="text-3xl font-bold mb-6 text-brand-main serif-font">お問い合わせ</h2>
+                     <p class="mb-8 font-light text-slate-600 leading-relaxed">
+                         数学オンライン塾『en』では、随時無料の学習相談を行っております。<br>
+                         まずは現状をお聞かせください。無理な勧誘は一切いたしません。
+                     </p>
+                     
+                     <div class="bg-brand-light p-6 border-l-4 border-brand-accent mb-8">
+                        <h4 class="font-bold text-brand-main mb-2"><i class="fa-solid fa-video mr-2"></i>オンライン受講について</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            授業は、原則的に<span class="font-bold">Zoom</span>を利用して、オンラインで行います。<br>
+                            Zoomが利用できるインターネット接続環境をご用意ください。
+                        </p>
+                     </div>
+
+                     <div class="space-y-4 text-sm text-slate-500">
+                         <p>※全国・海外どこからでも受講可能です。</p>
+                     </div>
+                 </div>
+                 
+                 <div class="md:w-1/2 w-full bg-slate-50 p-10 border border-slate-200 rounded-sm">
+                    <form onsubmit="event.preventDefault();" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-2 tracking-wider">お名前</label>
+                            <input type="text" class="w-full bg-white border border-slate-300 p-3 focus:outline-none focus:border-brand-accent transition-colors" placeholder="例：数式 太郎">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-2 tracking-wider">メールアドレス</label>
+                            <input type="email" class="w-full bg-white border border-slate-300 p-3 focus:outline-none focus:border-brand-accent transition-colors" placeholder="email@example.com">
+                        </div>
+                         <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-2 tracking-wider">学年・属性</label>
+                            <select class="w-full bg-white border border-slate-300 p-3 focus:outline-none focus:border-brand-accent transition-colors">
+                                <option>高校生</option>
+                                <option>既卒・浪人生</option>
+                                <option>社会人・再受験</option>
+                                <option>保護者様</option>
+                                <option>その他</option>
+                            </select>
+                        </div>
+                        <button class="w-full bg-brand-main hover:bg-brand-accent text-white font-bold py-4 px-6 transition-all duration-300 mt-4 tracking-widest shadow-lg">
+                            送信する
+                        </button>
+                    </form>
+                 </div>
+             </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="font-serif font-bold text-xl text-white">en</span>
+                        <span class="text-sm tracking-wider">Mathematical Institute</span>
+                    </div>
+                    <p class="text-xs text-slate-600">
+                        運営: 数学専門 オンライン塾『en』<br>
+                        ※完全オンラインのため実店舗はございません
+                    </p>
+                </div>
+                <div class="flex gap-8 text-xs font-medium tracking-wider">
+                    <a href="#" class="hover:text-white transition-colors">TOP</a>
+                    <a href="#concept" class="hover:text-white transition-colors">CONCEPT</a>
+                    <a href="#method" class="hover:text-white transition-colors">METHOD</a>
+                    <a href="#contact" class="hover:text-white transition-colors">CONTACT</a>
+                </div>
+            </div>
+            <div class="text-center mt-12 text-xs text-slate-700">
+                &copy; 2024 Math Online School en. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when link is clicked
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for fade-in animation
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up, .animate-on-load').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
